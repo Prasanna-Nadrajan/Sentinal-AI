@@ -16,10 +16,12 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, Request, Response
+from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from .explain import build_explanation, determine_risk_category, top_factors_for_prediction
 from .model_service import ModelService, payload_to_raw_feature_map, request_to_model_frame
+from .mock_ehr_stream import generate_patient_stream
 from .report import generate_pdf_report
 from .schemas import (
     FHIRPredictionRequest,
@@ -288,3 +290,22 @@ def fhir_predict(payload: FHIRPredictionRequest) -> PredictionResponse:
     """Accept FHIR Observation resources and run sepsis prediction."""
     prediction_request = _fhir_to_prediction_request(payload)
     return _run_prediction(prediction_request)
+
+
+@app.get("/api/fhir/Patient/{patient_id}/risk-feed")
+async def risk_feed(patient_id: str) -> StreamingResponse:
+    """Stream real-time sepsis risk updates via Server-Sent Events (SSE)."""
+    async def event_generator():
+        async for patient_state in generate_patient_stream():
+            # Run the XGBoost prediction on the current patient state
+            prediction = _run_prediction(patient_state)
+            
+            # Format as SSE event
+            data = json.dumps(prediction.model_dump())
+            yield f"data: {data}\n\n"
+
+    return StreamingResponse(
+        event_generator(), 
+        media_type="text/event-stream"
+    )
+

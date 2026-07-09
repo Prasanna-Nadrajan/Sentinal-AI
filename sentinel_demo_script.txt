@@ -1,0 +1,74 @@
+SentinelAI Prototype Demo Walkthrough
+
+Estimated Duration: 3.5 - 4.5 minutes
+Pacing: Conversational, guiding the viewer's eyes to specific parts of the screen. Wait a beat after clicking buttons.
+
+---
+
+1. Dashboard Introduction (0:00 - 0:45)
+(Visual: Full screen of the SentinelAI dashboard, no prediction run yet.)
+
+Speaker:
+"Welcome to the SentinelAI prototype. This is the primary clinical dashboard a triage nurse or doctor would use. 
+
+I designed this with a dark mode aesthetic specifically to reduce eye strain during long ICU night shifts. 
+
+On the left, we have the Patient Vitals panel, where real-time data from Electronic Health Records flows in. On the right is our analytical panel—currently empty—where our AI will display the Sepsis Probability and its explanations once we run a prediction."
+
+---
+
+2. High-Risk Sepsis Case (0:45 - 1:45)
+(Visual: Zoom in slightly on the 'Patient Vitals' form.)
+
+Speaker:
+"Let's simulate a high-risk case. The Vitals panel captures standard metrics like Heart Rate and Temperature, plus critical values like MAP (Mean Arterial Pressure) and WBC (White Blood Cell count).
+
+Here, the Heart Rate is elevated at 110, and MAP is dangerously low at 62. Let's click 'Run Sepsis Prediction'."
+
+(Action: Click 'Run Sepsis Prediction'.)
+
+Speaker:
+"Instantly, the backend processes the data. The Sepsis Probability Gauge on the right animates up to an 85% severe risk. 
+
+Because it crosses our 70% threshold, the UI flags this patient with a red, pulsing 'CRITICAL' badge. This tells the doctor immediately that urgent attention is needed."
+
+---
+
+3. Explainable AI Breakdown (1:45 - 2:45)
+(Visual: Focus on the 'InsightCard' panel below the gauge.)
+
+Speaker:
+"But a high score isn't enough; the doctor needs to know why. Below the gauge is our Clinical Assessment panel, powered by Explainable AI (SHAP and LIME).
+
+The Feature Attribution section shows the AI's logic. It highlights the high Heart Rate and the low MAP. The AI is explicitly saying: 'I am flagging this patient because their blood pressure is collapsing while their heart rate is spiking.' 
+
+This eliminates the 'Black Box' problem. The system also maps these findings to hospital protocols, recommending vasopressor support for the low MAP."
+
+---
+
+4. Low-Risk Stable Case (2:45 - 3:45)
+(Visual: Reset Vitals to normal: HR 75, Temp 37.0, MAP 90, WBC 7.0.)
+
+Speaker:
+"It's equally important to see how the system handles a stable patient to avoid 'alarm fatigue'.
+
+Let me adjust these vitals to a healthy baseline. We'll drop Heart Rate to 75 and raise MAP to 90. I'll click 'Run Sepsis Prediction' again."
+
+(Action: Click predict. Gauge drops to ~12%.)
+
+Speaker:
+"The gauge stays low at 12%, and we get a green 'STABLE' badge. 
+
+Our AI explains that because all vitals are within healthy baselines, it confidently suppresses the sepsis risk score. There are no frantic alerts—just a quiet confirmation of stability."
+
+---
+
+5. PDF Reporting (3:45 - 4:30)
+(Visual: Move cursor to 'Download Clinical Report' button in the header and click it.)
+
+Speaker:
+"Finally, clinical documentation is vital. By clicking 'Download Clinical Report', our backend uses ReportLab to instantly generate a print-ready PDF. 
+
+It packages the vitals, the risk score, and the AI's feature attributions into an industry-standard medical document, ready for the patient's chart.
+
+That is SentinelAI: predicting risk, explaining its logic, and integrating seamlessly into clinical workflows."

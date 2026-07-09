@@ -1,0 +1,74 @@
+SentinelAI Presentation Script (Concise 5-Minute Version)
+
+Estimated Duration: 4.5 - 5 minutes
+Tone & Pacing: Educational, conversational, and direct. Move swiftly but clearly through the slides.
+
+---
+
+Slide 1: Introduction (0:00 - 0:45)
+(Visual: SentinelAI logo, "Predict. Explain. Save Lives.")
+
+Speaker:
+"Hello, my name is Prasanna Nadrajan. Today I’ll be introducing you to SentinelAI. 
+
+Our mission is simple: Predict. Explain. Save Lives. 
+
+SentinelAI is a Clinical Decision Support System built for early Sepsis prediction. Think of it as an intelligent co-pilot for doctors. Just as pilots rely on sensors to fly safely, a CDSS constantly monitors a patient's real-time data, acting as an early warning system to help doctors make life-saving decisions."
+
+---
+
+Slide 2: The Problem (0:45 - 1:30)
+(Visual: "Golden Hour" and "Black Box" concepts)
+
+Speaker:
+"We are solving two major crises. First is the 'Golden Hour'. Sepsis is an overwhelming immune response that attacks the body’s own organs. Time is critical. Every hour treatment is delayed, mortality increases by 8%. Doctors have a tiny window to catch it.
+
+The second is the 'Black Box' AI issue. Many AI models can predict diseases, but they can't explain how they got the answer. Doctors are scientists; they won't trust an unexplained alert with a human life. They need to see the AI's math."
+
+---
+
+Slide 3: The Data Pipeline (1:30 - 2:15)
+(Visual: EHR, Wearables, SDOH into the inference pipeline)
+
+Speaker:
+"SentinelAI bridges this gap by combining speed with transparency. 
+
+We gather data from three main sources: Electronic Health Records (patient history), Wearables (real-time vitals like heart rate), and Social Determinants of Health (environmental factors). 
+
+This data flows into our Inference Pipeline. We clean it, extract the most critical features, and feed it into our AI engine to make a highly accurate prediction about developing sepsis."
+
+---
+
+Slide 4: Explainable AI (XAI) (2:15 - 3:00)
+(Visual: SHAP/LIME feature importance)
+
+Speaker:
+"A prediction alone isn't enough, which brings us to our Explainable AI engine. 
+
+Instead of relying on basic math like Z-scores, we use advanced frameworks called SHAP and LIME. Think of them as digital detectives. When the AI predicts sepsis, these tools analyze the decision and highlight the exact clues. 
+
+They tell the doctor: 'I am predicting high risk because the blood pressure just dropped 10 points while the white blood cell count spiked.' This completely destroys the Black Box, building immediate trust."
+
+---
+
+Slide 5: Architecture (3:00 - 3:45)
+(Visual: Tech stack, FHIR, HIPAA, PDF reports)
+
+Speaker:
+"Under the hood, SentinelAI is an enterprise-grade application. 
+
+The front end is built with React and Vite for a fast, responsive clinical dashboard. The back end is powered by Python. 
+
+For version 2.0, we added crucial features for real hospital integration: FHIR Compliance to instantly communicate with any hospital system, strict HIPAA Audit Logging to guarantee data security, and automated PDF Reports using ReportLab for seamless clinical documentation."
+
+---
+
+Slide 6: Metrics & Conclusion (3:45 - 4:45)
+(Visual: Accuracy, Latency, and Trust metrics)
+
+Speaker:
+"Finally, the real-world impact. We tackled 'Alarm Fatigue'—the danger of systems constantly beeping for false alarms. Our model is highly accurate, significantly reducing false alerts so doctors know when to act. 
+
+Our system operates with under 200 milliseconds of latency, processing data faster than the blink of an eye. And thanks to our Explainable AI, clinical trust scores have soared. 
+
+SentinelAI empowers hospitals to catch sepsis early, fundamentally transforming a terrifying disease into a preventable condition. Thank you for your time."

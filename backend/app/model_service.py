@@ -10,8 +10,9 @@ from .schemas import PredictionRequest
 MODEL_PATH = (
     Path(__file__).resolve().parents[2]
     / "EarlySepsisPrediction-master"
-    / "sepsis_rf_model.joblib"
+    / "sepsis_xgb_model.joblib"
 )
+
 
 MODEL_FEATURE_ORDER = [
     "HR",
