@@ -1,4 +1,4 @@
-import { Download, FileText, Play, Square } from 'lucide-react'
+import { Download, FileText } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 
 import { InsightCard } from './components/InsightCard'
