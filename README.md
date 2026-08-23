@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- LOGO / BANNER PLACEHOLDER -->
-<img src="https://img.shields.io/badge/-%F0%9F%A7%AC%20SENTINEL%20AI-%230a0f1e?style=for-the-badge&labelColor=0a0f1e" alt="SentinelAI" width="400"/>
+<img src="https://img.shields.io/badge/-%F0%9F%A7%AC%20SENTINAL%20AI-%230a0f1e?style=for-the-badge&labelColor=0a0f1e" alt="SentinelAI" width="400"/>
 
 ### *Predict. Explain. Save Lives.*
 
