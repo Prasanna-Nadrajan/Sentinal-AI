@@ -301,7 +301,11 @@ async def risk_feed(patient_id: str) -> StreamingResponse:
             prediction = _run_prediction(patient_state)
             
             # Format as SSE event
-            data = json.dumps(prediction.model_dump())
+            payload = {
+                "vitals": patient_state.model_dump(),
+                "prediction": prediction.model_dump()
+            }
+            data = json.dumps(payload)
             yield f"data: {data}\n\n"
 
     return StreamingResponse(

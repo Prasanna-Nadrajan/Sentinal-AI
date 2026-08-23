@@ -1,5 +1,5 @@
-import { Download, FileText } from 'lucide-react'
-import { useState } from 'react'
+import { Download, FileText, Play, Square } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
 
 import { InsightCard } from './components/InsightCard'
 import { RiskGauge } from './components/RiskGauge'
@@ -14,6 +14,49 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [reportLoading, setReportLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isLive, setIsLive] = useState(false)
+  const eventSourceRef = useRef<EventSource | null>(null)
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => stopLiveStream()
+  }, [])
+
+  function stopLiveStream() {
+    if (eventSourceRef.current) {
+      eventSourceRef.current.close()
+      eventSourceRef.current = null
+    }
+    setIsLive(false)
+  }
+
+  function toggleLiveStream() {
+    if (isLive) {
+      stopLiveStream()
+    } else {
+      setIsLive(true)
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
+      const es = new EventSource(`${API_BASE_URL}/api/fhir/Patient/123/risk-feed`)
+      
+      es.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data)
+          setResult(data.prediction)
+          setLastPayload(data.vitals)
+        } catch (e) {
+          console.error("Error parsing SSE data", e)
+        }
+      }
+      
+      es.onerror = (e) => {
+        console.error("EventSource failed:", e)
+        stopLiveStream()
+        setError("Live feed connection lost.")
+      }
+      
+      eventSourceRef.current = es
+    }
+  }
 
   async function handlePredict(payload: PredictionRequest) {
     setLoading(true)
@@ -80,7 +123,13 @@ function App() {
       <section className="dashboard-grid">
         {/* Left Column — Vitals Input + Trend Chart */}
         <div className="left-column">
-          <VitalsInputForm onSubmit={handlePredict} loading={loading} />
+          <VitalsInputForm 
+            onSubmit={handlePredict} 
+            loading={loading} 
+            isLive={isLive}
+            onToggleLive={toggleLiveStream}
+            currentVitals={lastPayload}
+          />
           {result && lastPayload && (
             <VitalsTrendChart
               heartRate={lastPayload.heart_rate}
